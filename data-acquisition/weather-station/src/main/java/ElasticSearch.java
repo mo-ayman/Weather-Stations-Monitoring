@@ -1,12 +1,22 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.elasticsearch.client.Request;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
 
+import javax.net.ssl.SSLContext;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ElasticSearch {
     private long expectedSeqNo;
@@ -14,11 +24,46 @@ public class ElasticSearch {
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
 
+    private static final String ELASTICSEARCH_URL = "https://localhost:9200"; // Use your Elasticsearch URL
+    private static final String CA_CERT_PATH = "/media/gamal/volume/semester/data/assig/5/http_ca.crt"; // Path to your CA certificate
+    private static final String ELASTICSEARCH_USERNAME = "elastic"; // Replace with your Elasticsearch username
+    private static final String ELASTICSEARCH_PASSWORD = "fpzwLcYcdTS_ug8stPju"; // Replace with your Elasticsearch password
+
     public ElasticSearch() {
         this.isValidSeqNo = false;
         this.objectMapper = new ObjectMapper();
-        RestClientBuilder builder = RestClient.builder(HttpHost.create("http://localhost:9200"));
-        this.restClient = builder.build();
+        this.restClient = createRestClient();
+    }
+
+    private RestClient createRestClient() {
+        try {
+            Path caCertPath = Paths.get(CA_CERT_PATH);
+
+            // Load CA certificate
+            SSLContextBuilder sslContextBuilder = SSLContextBuilder.create();
+            try (InputStream is = Files.newInputStream(caCertPath)) {
+                sslContextBuilder.loadTrustMaterial(null, (chain, authType) -> true);
+            }
+
+            SSLContext sslContext = sslContextBuilder.build();
+
+            BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(AuthScope.ANY,
+                    new UsernamePasswordCredentials(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD));
+
+            CloseableHttpClient httpClient = HttpClients.custom()
+                    .setSSLContext(sslContext)
+                    .setDefaultCredentialsProvider(credentialsProvider)
+                    .build();
+
+            return RestClient.builder(HttpHost.create(ELASTICSEARCH_URL))
+                    .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
+                            .setSSLContext(sslContext)
+                            .setDefaultCredentialsProvider(credentialsProvider))
+                    .build();
+        } catch (Exception e) {
+            throw new RuntimeException("Error creating RestClient: " + e.getMessage(), e);
+        }
     }
 
     public void processMessage(WeatherMessage weatherMessage) {
@@ -55,15 +100,6 @@ public class ElasticSearch {
             System.out.println("Error sending message: " + e.getMessage());
         }
     }
-
-//    private String convertToJson(WeatherMessage weatherMessage) {
-//        try {
-//            return objectMapper.writeValueAsString(weatherMessage);
-//        } catch (JsonProcessingException e) {
-//            System.out.println("Error converting to JSON: " + e.getMessage());
-//            return null;
-//        }
-//    }
 
     private String convertToJson(WeatherMessage weatherMessage) throws JsonProcessingException {
         return objectMapper.writeValueAsString(weatherMessage);
