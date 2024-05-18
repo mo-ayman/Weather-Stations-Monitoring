@@ -30,16 +30,19 @@ public class BaseCentralStationController {
         long maxTimestamp = 0;
         WeatherMessage lastMessage = null;
         for (WeatherMessage message : messages) {
-            if (list.size() < BATCH_SIZE) {
-                list.add(message);
-            } else {
+            if (list.size() >= BATCH_SIZE) {
+                System.out.println("----------------------------------- Station id" + stationId + "---------------------------------------------");
                 writeParquet.write(outputDirectory + "/station_" + stationId, list);
-                list = new ArrayList<>();
+                list.clear();
+                System.out.println("\n#########################################################################################################");
             }
+
             if (maxTimestamp < message.getStatusTimestamp()) {
                 maxTimestamp = message.getStatusTimestamp();
                 lastMessage = message;
             }
+            list.add(message);
+            System.out.println(message);
         }
         if (lastMessage != null) {
             Gson gson = new Gson();

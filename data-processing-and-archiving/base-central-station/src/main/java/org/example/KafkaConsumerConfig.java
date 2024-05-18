@@ -19,13 +19,13 @@ class KafkaConsumerConfig {
 
     public KafkaConsumerConfig(String kafkaBootstrapServer) {
 
-
         // Kafka consumer configuration
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBootstrapServer);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "station-consumer-group");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         // Create Kafka consumer
          consumer = new KafkaConsumer<>(props);
@@ -38,7 +38,6 @@ class KafkaConsumerConfig {
         ArrayList<WeatherMessage> messages = new ArrayList<>();
         for (ConsumerRecord<String, String> record : records) {
             // parse record
-            System.out.println(record.value());
             messages.add(jsonAdapter.fromJson(record.value(), WeatherMessage.class));
 
         }
