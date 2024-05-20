@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: data-acquisition
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/data-acquisition: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/data-acquisition: "true"

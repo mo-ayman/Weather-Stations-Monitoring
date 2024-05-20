@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  base-central-station:
+    build: ./base-central-station
+    container_name: base-central-station
+    environment:
+      - ELASTIC_SERVER=elastic-search
+      - KAFKA_BOOTSTRAP_SERVER=kafka:9092
+      - STATION_ID_START=1
+      - STATION_ID_END=10
+      - BATCH_SIZE=50 
+    networks:
+      - elastic
+      - data-acquisition
+
+    volumes:
+      - base-station-elastic-data:/output
+
+networks:
+  data-acquisition:
+    external: true
+  elastic:
+    external: true
+
+volumes:
+  base-station-elastic-data:
+    external: true
