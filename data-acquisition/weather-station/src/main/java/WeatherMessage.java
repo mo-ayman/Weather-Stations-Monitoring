@@ -15,6 +15,14 @@ public class WeatherMessage {
         this.weather = weather;
     }
 
+    public long getS_no() {
+        return s_no;
+    }
+
+    public long getStation_id() {
+        return station_id;
+    }
+
     static class Weather {
         private int humidity;
         private int temperature;
