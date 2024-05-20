@@ -1,0 +1,41 @@
+docker network create elastic
+docker pull docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+docker run --rm --name es01 --net elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -t docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+
+
+docker run --rm --name es01 --net elastic -p 9200:9200 -p 9300:9300 -t docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+
+export ELASTIC_PASSWORD="n8O=Y9wYYqSUjoo6XaVL"
+export ENROLLMENT_TOKEN="eyJ2ZXIiOiI4LjEzLjQiLCJhZHIiOlsiMTkyLjE2OC4xLjEyOjkyMDAiXSwiZmdyIjoiYTY1NTkzYWRiYzUzNGQyYTc2NWJmZTdlNTFiMzgzNjIxMmExNGU5YWVhMGUwMmFjNmQzYjYzNjIzMTM1YTE3MiIsImtleSI6IjhkWVNiSThCZ1haTTlLazFKRmtjOi1tVG5yT3RRU1BpRHF6d1JCdkQyZEEifQ=="
+docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt .
+curl --cacert http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200
+
+docker pull docker.elastic.co/kibana/kibana:8.13.4
+docker run --rm --name kibana --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:8.13.4
+
+
+docker pull docker.elastic.co/logstash/logstash:8.13.4
+docker volume create logstash_config
+docker run --rm -v /media/gamal/volume/semester/data/assig/5:/config -v logstash_config:/usr/share/logstash/config busybox cp /config/parquet_to_elasticsearch.conf /usr/share/logstash/config/
+docker run --rm -v logstash_config:/usr/share/logstash/config docker.elastic.co/logstash/logstash:8.13.4 -e -f /usr/share/logstash/config/parquet_to_elasticsearch.conf
+docker run --rm -v /media/gamal/volume/semester/data/assig/5/logstash.yml:/usr/share/logstash/config/logstash.yml docker.elastic.co/logstash/logstash:8.13.4 -f /usr/share/logstash/config/parquet_to_elasticsearch.conf
+
+
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+
+
+
+the one that work:
+https://www.baeldung.com/elasticsearch-java
+docker run -d --name elastic-test -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+docker run -d --name elastic-test -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.13.4 -E xpack.fleet.enabled=false
+
+
+
+docker run --rm -d --name kibana-test -p 5601:5601 --elasticsearch.hosts=http://localhost:9200 docker.elastic.co/kibana/kibana:8.13.4
+
+put in 
+xpack.fleet.enabled: false 
+
+
+docker run --rm -d --name elastic-test -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.13.4

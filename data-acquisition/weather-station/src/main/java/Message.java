@@ -10,11 +10,12 @@ public class Message {
        while (true) {
            // Wait for 1 second
            Thread.sleep(1000);
+           s_no++;
 //        int stationId = random.nextInt(1000) + 1;
            // Determine if the message should be dropped
            if (random.nextInt(10) != 0) {
                // Produce the message
-               return new WeatherMessage(stationId, ++s_no, generateBatteryStatus(), System.currentTimeMillis() / 1000, new WeatherMessage.Weather(random.nextInt(100), random.nextInt(100), random.nextInt(100)));
+               return new WeatherMessage(stationId, s_no, generateBatteryStatus(), System.currentTimeMillis() / 1000, new WeatherMessage.Weather(random.nextInt(100), random.nextInt(100), random.nextInt(100)));
 
            }
        }

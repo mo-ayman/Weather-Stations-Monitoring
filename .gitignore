@@ -1,3 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+.idea
+/.idea/
+/data-acquisition/raining-triggers/.idea/
+/data-acquisition/weather-station/.idea/
+/data-processing-and-archiving/.idea/
+/base-central-station/.idea/
+/base-central-station/output/

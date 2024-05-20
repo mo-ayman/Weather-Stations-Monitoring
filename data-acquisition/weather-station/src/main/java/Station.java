@@ -10,6 +10,7 @@ public class Station {
 
      public static void main(String[] args) throws InterruptedException {
          // parse arguments for station id
+
          long stationId = Long.parseLong(System.getenv("STATION_ID"));
          String kafkaBootstrapServer = System.getenv("KAFKA_BOOTSTRAP_SERVER");
          System.out.println("STATION_ID: " + stationId);
