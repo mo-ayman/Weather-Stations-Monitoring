@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: base-central-station
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: base-central-station
+  template:
+    metadata:
+      labels:
+        app: base-central-station
+    spec:
+      containers:
+        - name: base-central-station
+          image: base-central-station:latest
+          imagePullPolicy: IfNotPresent
+
+          env:
+            - name: ELASTIC_SERVER
+              value: "elastic-search"
+            - name: KAFKA_BOOTSTRAP_SERVER
+              value: "kafka:9092"
+            - name: STATION_ID_START
+              value: "1"
+            - name: STATION_ID_END
+              value: "10"
+            - name: BATCH_SIZE
+              value: "50"
+          volumeMounts:
+            - name: base-station-elastic-data
+              mountPath: /output
+      volumes:
+        - name: base-station-elastic-data
+          persistentVolumeClaim:
+            claimName: base-station-elastic-data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: base-central-station
+spec:
+  selector:
+    app: base-central-station
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

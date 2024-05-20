@@ -1,0 +1,218 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station1
+  template:
+    metadata:
+      labels:
+        app: station1
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "1"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station2
+  template:
+    metadata:
+      labels:
+        app: station2
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "2"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station3
+  template:
+    metadata:
+      labels:
+        app: station3
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "3"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station4
+  template:
+    metadata:
+      labels:
+        app: station4
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "4"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station5
+  template:
+    metadata:
+      labels:
+        app: station5
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "5"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station6
+  template:
+    metadata:
+      labels:
+        app: station6
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "6"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station7
+  template:
+    metadata:
+      labels:
+        app: station7
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "7"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station8
+  template:
+    metadata:
+      labels:
+        app: station8
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "8"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station9
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station9
+  template:
+    metadata:
+      labels:
+        app: station9
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "9"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station10
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: station10
+  template:
+    metadata:
+      labels:
+        app: station10
+    spec:
+      containers:
+        - name: station
+          image: station:latest
+          env:
+            - name: STATION_ID
+              value: "10"

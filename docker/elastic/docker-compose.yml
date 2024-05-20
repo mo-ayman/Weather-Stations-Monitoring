@@ -2,7 +2,7 @@ version: '3'
 
 services:
   elastic-search:
-    build: .
+    image: elastic-search
     container_name: elastic-search
     environment:
       - discovery.type=single-node

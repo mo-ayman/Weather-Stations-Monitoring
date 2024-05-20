@@ -3,9 +3,7 @@ version: '3'
 
 services:
   station1:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '1'
     networks:
@@ -13,9 +11,7 @@ services:
 
     
   station2:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '2'
     networks:
@@ -23,72 +19,56 @@ services:
     
 
   station3:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '3'
     networks:
     - data-acquisition
 
   station4:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '4'
     networks:
     - data-acquisition
 
   station5:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '5'
     networks:
     - data-acquisition
 
   station6:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '6'
     networks:
     - data-acquisition
 
   station7:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '7'
     networks:
     - data-acquisition
 
   station8:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '8'
     networks:
     - data-acquisition
 
   station9:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '9'
     networks:
     - data-acquisition
     
   station10:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: station:latest
     environment:
       STATION_ID: '10'
     networks:

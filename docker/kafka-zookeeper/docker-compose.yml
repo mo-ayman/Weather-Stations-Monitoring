@@ -16,9 +16,7 @@ services:
 
   kafka:
     container_name: kafka
-    image: docker.io/bitnami/kafka:3.4
-    volumes:
-      - ${PWD}/kafka-processor:/app
+    image: kafka
     ports:
       - "29092:29092"
     environment:

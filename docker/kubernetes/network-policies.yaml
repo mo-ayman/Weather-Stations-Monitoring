@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: data-acquisition-networkpolicy
+spec:
+  podSelector:
+    matchLabels:
+      role: data-acquisition
+  policyTypes:
+  - Ingress
+  - Egress
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: elastic-networkpolicy
+spec:
+  podSelector:
+    matchLabels:
+      role: elastic
+  policyTypes:
+  - Ingress
+  - Egress
