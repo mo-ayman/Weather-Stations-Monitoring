@@ -15,10 +15,9 @@ import java.util.Properties;
 
 public class KafkaConfig {
     KafkaProducer<String, String> producer;
-//    String kafkaBootstrapServer = System.getenv("KAFKA_BOOTSTRAP_SERVER");
-//    String outputTopic = System.getenv("OUTPUT_TOPIC");
-    String kafkaBootstrapServer = "localhost:29092";
-    String outputTopic = "rainning-triggers";
+   String kafkaBootstrapServer = System.getenv("KAFKA_BOOTSTRAP_SERVER");
+   String outputTopic = System.getenv("OUTPUT_TOPIC");
+
     private void producerConfig() {
         // Kafka producer configuration
         Properties properties = new Properties();
@@ -33,7 +32,6 @@ public class KafkaConfig {
 
 
     }
-
 
      public KafkaConfig() {
         producerConfig();

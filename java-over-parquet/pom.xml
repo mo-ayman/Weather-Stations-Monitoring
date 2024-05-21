@@ -68,21 +68,8 @@
             <version>2.14.2</version>
         </dependency>
 
-        <!-- Spring Boot Starter Web for REST API support -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.6.4</version>
 
-        </dependency>
 
-        <!-- Spring Boot Starter Test for testing support -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <version>2.6.4</version>
 
-        </dependency>
     </dependencies>
 </project>

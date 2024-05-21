@@ -27,7 +27,6 @@ public class ElasticClient {
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream));
 
             // Send a request to the server
-            String request = "/api/path"; // Replace with your desired API path
             writer.println(dirPath);
             writer.flush(); // Flush the output stream to ensure data is sent
 

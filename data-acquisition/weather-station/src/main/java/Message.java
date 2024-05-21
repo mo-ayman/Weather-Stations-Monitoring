@@ -11,7 +11,6 @@ public class Message {
            // Wait for 1 second
            Thread.sleep(1000);
            s_no++;
-//        int stationId = random.nextInt(1000) + 1;
            // Determine if the message should be dropped
            if (random.nextInt(10) != 0) {
                // Produce the message

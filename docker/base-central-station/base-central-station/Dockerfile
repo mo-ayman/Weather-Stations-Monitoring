@@ -7,7 +7,5 @@ WORKDIR /app
 COPY base-central-station.jar /app
 
 
-
-
 # Command to run your application
 CMD ["java", "-jar", "/app/base-central-station.jar"]

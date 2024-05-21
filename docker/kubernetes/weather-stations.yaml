@@ -15,6 +15,9 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "1"
@@ -37,6 +40,8 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "2"
@@ -59,6 +64,8 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "3"
@@ -81,6 +88,8 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "4"
@@ -103,6 +112,8 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "5"
@@ -125,6 +136,8 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "6"
@@ -147,6 +160,7 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "7"
@@ -169,6 +183,7 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "8"
@@ -191,6 +206,7 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "9"
@@ -213,6 +229,7 @@ spec:
       containers:
         - name: station
           image: station:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: STATION_ID
               value: "10"

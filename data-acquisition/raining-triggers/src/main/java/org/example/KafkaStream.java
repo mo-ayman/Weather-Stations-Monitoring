@@ -16,25 +16,20 @@ import java.util.Properties;
 public class KafkaStream {
     public static void main(String[] args) {
 
-//        long startStationId = Long.parseLong(System.getenv("START_STATION_ID"));
-//        long endStationId = Long.parseLong(System.getenv("END_STATION_ID"));
-//        String outputTopic = System.getenv("OUTPUT_TOPIC");
-//        String kafkaBootstrapServer = System.getenv("KAFKA_BOOTSTRAP_SERVER");
-        String kafkaBootstrapServer = "localhost:29092";
+       long startStationId = Long.parseLong(System.getenv("START_STATION_ID"));
+       long endStationId = Long.parseLong(System.getenv("END_STATION_ID"));
+       String outputTopic = System.getenv("OUTPUT_TOPIC");
+       String kafkaBootstrapServer = System.getenv("KAFKA_BOOTSTRAP_SERVER");
 
-//        System.out.println("KAFKA_BOOTSTRAP_SERVER: " + kafkaBootstrapServer);
-//        System.out.println("START_STATION_ID: " + startStationId);
-//        System.out.println("END_STATION_ID: " + endStationId);
-//        System.out.println("OUTPUT_TOPIC: " + outputTopic);
-        Properties props = new Properties();
+       System.out.println("KAFKA_BOOTSTRAP_SERVER: " + kafkaBootstrapServer);
+       System.out.println("START_STATION_ID: " + startStationId);
+       System.out.println("END_STATION_ID: " + endStationId);
+       System.out.println("OUTPUT_TOPIC: " + outputTopic);
+        
+       Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "my-streams-app");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBootstrapServer);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // Set to earliest to consume from the beginning
-
-        System.out.println();
-
-        long startStationId = 1;
-        long endStationId = 5;
 
         StreamsBuilder builder = new StreamsBuilder();
 
@@ -44,9 +39,7 @@ public class KafkaStream {
         // Create streams for each station within the specified range
         for (long stationId = startStationId; stationId <= endStationId; stationId++) {
             KStream<String, String> inputStream = builder.stream("stationId" + stationId, Consumed.with(Serdes.String(), Serdes.String()));
-            // Process each stream independently
             inputStream.foreach((key, value) -> {
-                // Example: If processed value meets a certain condition, write to a specific topic
                 if (StreamController.conditionMet(value)) {
                     kafkaConfig.sendWeatherMessage(value);
                 }
