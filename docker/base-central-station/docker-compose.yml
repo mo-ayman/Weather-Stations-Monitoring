@@ -5,7 +5,12 @@ services:
     image: base-central-station
     container_name: base-central-station
     environment:
-
+      - ELASTIC_SERVER=elastic-server
+      - KAFKA_BOOTSTRAP_SERVER=kafka:9092
+      - STATION_ID_START=1
+      - STATION_ID_END=10
+      - BATCH_SIZE=50
+  
     networks:
       - elastic
       - data-acquisition

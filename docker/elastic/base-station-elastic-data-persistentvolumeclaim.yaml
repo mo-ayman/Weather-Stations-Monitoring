@@ -3,8 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: kafka-claim0
-  name: kafka-claim0
+    io.kompose.service: base-station-elastic-data
+  name: base-station-elastic-data
 spec:
   accessModes:
     - ReadWriteOnce

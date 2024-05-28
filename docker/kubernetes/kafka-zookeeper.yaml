@@ -83,7 +83,6 @@ spec:
             - name: OUTPUT_TOPIC
               value: "rainning-triggers"
           ports:
-            - containerPort: 29092
             - containerPort: 9092
 
 ---
@@ -95,10 +94,6 @@ spec:
   selector:
     app: kafka
   ports:
-    - name: external
-      protocol: TCP
-      port: 29092
-      targetPort: 29092
     - name: internal
       protocol: TCP
       port: 9092
